@@ -1,15 +1,26 @@
 package domain
 
-class AnalisadorDeAprovacao {
+import domain.criterios.CriterioDeAprovacao
+import domain.BoletimFechado
+import domain.Boletim
 
-    // ---------------------------------
-    //
-    //      Seu código deve vir aqui
-    //
-    //      Defina atributos e métodos conforme especificado
-    //      no arquivo de teste encontrado em
-    //      'src/test/kotlin/domain/AnalisadorDeAprovacaoTest'
-    //
-    // ---------------------------------
+
+class AnalisadorDeAprovacao {
+    
+    private lateinit var criterioAprov: CriterioDeAprovacao
+    
+    fun 'defineCriterio(criterio:CriterioDeAprovacao)' {
+        
+        criterioAprov = criterio
+        
+    }
+    
+    
+    fun 'fechaBoletim(boletim:Boletim)' : BoletimFechado {
+        
+        var mediaFinal = criterioAprov.estaAprovado(boletim)
+        var foiAprovado = criterioAprov.mediaFinal(boletim)
+        
+        return BoletimFechado(boletim.mediaEPs, boletim.mediaMiniEPs, mediaFinal, foiAprovado)
 
 }
